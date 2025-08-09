@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import AdminRoutes from './routes/AdminRoutes';
+import FormateurRoutes from './routes/FormateurRoutes';
+import ApprenantRoutes from './routes/ApprenantRoutes';
+import PublicRoutes from './routes/PublicRoutes';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App">
+      <Routes>
+        {/* Routes publiques */}
+        <Route path="/*" element={<PublicRoutes />} />
+
+        {/* Routes privées */}
+        <Route path="/admin/*" element={<AdminRoutes />} />
+        <Route path="/formateur/*" element={<FormateurRoutes />} />
+        <Route path="/apprenant/*" element={<ApprenantRoutes />} />
+
+        {/* Redirection en cas de mauvaise URL */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </div>
   );
+
 }
 
 export default App;
